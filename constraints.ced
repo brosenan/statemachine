@@ -1,0 +1,6 @@
+'/bootstrap':defAtom('bar2'::state).
+on(baz,foo,'bar2').
+'/bootstrap':signature(ambiguousTransition(S1,Ev,S2Prime)::'/bootstrap':error,[S1::state,Ev::event,S2Prime::state]).
+'/bootstrap':projection(ambiguousTransition(S1,Ev,S2Prime)::'/bootstrap':error,'/bootstrap':horiz(['/bootstrap':label(!'ambigous transition on'),'/bootstrap':vis(S1::state),'/bootstrap':label(!.),'/bootstrap':vis(Ev::event),'/bootstrap':label(! (:)),'/bootstrap':vis(S2Prime::state)])).
+'/util':behavior(on(S1,Ev,S2)::'/bootstrap':statement,!'should indicate an error when a transition already exists on Ev from S1 to another state', ('/bootstrap':check(cpi:path(!foo,[1]),on(baz,foo,bar)::'/bootstrap':statement,VNs,'/bootstrap':marker(cpi:path(!foo,[1]),'/bootstrap':error(ambiguousTransition(S1,Ev,S2Prime),VNs))),'/util':assertEqual(S1,baz,state),'/util':assertEqual(Ev,foo,event),'/util':assertEqual(S2Prime,'bar2',state))).
+annotation:shrink(('/bootstrap':checkError(on(S1,Ev,S2)::'/bootstrap':statement,ambiguousTransition(S1,Ev,S2Prime)):-transDefined(S1,Ev,S2Prime),\+S2Prime::state=S2::state)).

@@ -1,0 +1,17 @@
+'/bootstrap':defAtom(event::'/bootstrap':type).
+'/bootstrap':defAtom(bar::state).
+'/bootstrap':defAtom(state::'/bootstrap':type).
+'/bootstrap':defAtom(foo::event).
+'/bootstrap':defAtom(baz::state).
+'/bootstrap':signature(on(State1,Event,State2)::'/bootstrap':statement,[State1::state,Event::event,State2::state]).
+'/bootstrap':projection(on(State1,Event,State2)::'/bootstrap':statement,'/bootstrap':horiz(['/bootstrap':label(!on),'/bootstrap':vis(State1::state),'/bootstrap':label(!.),'/bootstrap':vis(Event::event),'/bootstrap':symbol(8658),'/bootstrap':vis(State2::state)])).
+on(bar,foo,baz).
+'/bootstrap':signature(transDefined(Source,Event,Dest)::'/bootstrap':pred,[Source::state,Event::event,Dest::state]).
+on(Source,Event,Dest)~>transDefined(Source,Event,Dest):-builtin:true.
+'/bootstrap':signature(trans(Source,Event,Dest)::'/bootstrap':pred,[Source::state,Event::event,Dest::state]).
+'/bootstrap':projection(trans(Source,Event,Dest)::'/bootstrap':pred,'/bootstrap':horiz(['/bootstrap':vis(Source::state),'/bootstrap':vert(['/bootstrap':halfSize('/bootstrap':vis(Event::event)),'/bootstrap':pivot('/bootstrap':symbol(10230))]),'/bootstrap':vis(Dest::state)])).
+'/bootstrap':alias(trans(Source,Event,Dest)::'/bootstrap':pred,! (->)).
+'/util':behavior(trans(Source,Event,Dest)::'/bootstrap':pred,!'succeeds for each transition from state Source to Dest on Event', (trans(bar,foo,Baz),'/util':assertEqual(Baz,baz,state))).
+'/bootstrap':defAtom('foo2'::event).
+'/util':behavior(trans(Source,Event,Dest)::'/bootstrap':pred,!'stays at the same state if no transition is defined', (trans(bar,'foo2',S2),'/util':assertEqual(S2,bar,state))).
+annotation:shrink((trans(S1,Ev,S2):-builtin:if(transDefined(S1,Ev,S2),builtin:true,S2::state=S1::state))).
