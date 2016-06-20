@@ -1,0 +1,8 @@
+'/bootstrap':signature(play(S1,EvSeq,S2)::'/bootstrap':pred,[S1::state,EvSeq::'/bootstrap':list(event),S2::state]).
+'/bootstrap':projection(play(S1,EvSeq,S2)::'/bootstrap':pred,'/bootstrap':horiz(['/bootstrap':vis(S1::state),'/bootstrap':vert(['/bootstrap':halfSize(cpi:vis(EvSeq::'/bootstrap':list(event),'/bootstrap':horizontal(0,0,'/bootstrap':label(! (,)),'/bootstrap':symbol(949)))),'/bootstrap':pivot('/bootstrap':symbol(10233))]),'/bootstrap':vis(S2::state)])).
+'/bootstrap':alias(play(S1,EvSeq,S2)::'/bootstrap':pred,!'=>').
+'/util':behavior(play(S1,EvSeq,S2)::'/bootstrap':pred,!'sets S2 = S1 for an empty EvSeq', (play(S1,[],S2),'/util':assertEqual(S2,S1,state))).
+play(S1,[],S1):-builtin:true.
+'/util':behavior(play(S1,EvSeq,S2)::'/bootstrap':pred,!'sets S2 to the destination in case of a single transition', (play(bar,[foo],S2),'/util':assertEqual(S2,baz,state))).
+'/util':behavior(play(S1,EvSeq,S2)::'/bootstrap':pred,!'applies multiple evens', (play(bar,[foo,foo],S2),'/util':assertEqual(S2,'bar2',state))).
+play(S1,[Fist|Rest],S3):-trans(S1,First,S2),play(S2,Rest,S3).
