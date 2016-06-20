@@ -1,0 +1,5 @@
+'/bootstrap':signature(par(S1,S2)::state,[S1::state,S2::state]).
+'/bootstrap':projection(par(S1,S2)::state,'/bootstrap':horiz(['/bootstrap':vis(S1::state),'/bootstrap':symbol(8741),'/bootstrap':vis(S2::state)])).
+'/bootstrap':alias(par(S1,S2)::state,!'||').
+'/util':behavior(par(S1,S2)::state,!'responds to events by applying them separately on S1 and S2', (trans(par(bar,baz),foo,Target),'/util':assertEqual(Target,par(baz,'bar2'),state))).
+annotation:shrink((transDefined(par(S1,S2),Ev,par(S1Prime,S2Prime)):-trans(S1,Ev,S1Prime),trans(S2,Ev,S2Prime))).
