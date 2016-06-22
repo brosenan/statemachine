@@ -5,4 +5,7 @@
 play(S1,[],S1):-builtin:true.
 '/util':behavior(play(S1,EvSeq,S2)::'/bootstrap':pred,!'sets S2 to the destination in case of a single transition', (play(bar,[foo],S2),'/util':assertEqual(S2,baz,state))).
 '/util':behavior(play(S1,EvSeq,S2)::'/bootstrap':pred,!'applies multiple evens', (play(bar,[foo,foo],S2),'/util':assertEqual(S2,'bar2',state))).
-play(S1,[Fist|Rest],S3):-trans(S1,First,S2),play(S2,Rest,S3).
+'/util':behavior(play(S1,EvSeq,S2)::'/bootstrap':pred,!'considers events emitted on entry to state', (play(par('/statemachine/examples':greenForCars,par('/statemachine/examples':carDrives,'/statemachine/examples':pedStopped)),['/statemachine/examples':pedButtonPressed],S2),'/util':assertEqual(S2,par('/statemachine/examples':greenForPeds,par('/statemachine/examples':carStopped,'/statemachine/examples':pedWalks)),state))).
+play(S1,[First|Rest],S3):-trans(S1,First,S2),builtin:if(entryEvents(S2,Evs,S1),'/bootstrap':append(Evs,Rest,AllEvents,event),AllEvents::'/bootstrap':list(event)=Rest::'/bootstrap':list(event)),play(S2,AllEvents,S3).
+'/bootstrap':signature(entryEvents(State,Events,PrevState)::'/bootstrap':pred,[State::state,Events::'/bootstrap':list(event),PrevState::state]).
+onEntry(State,Events)~>entryEvents(State,Events,PrevState):- \+State::state=PrevState::state.

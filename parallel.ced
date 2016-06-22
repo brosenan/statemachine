@@ -1,5 +1,6 @@
 '/bootstrap':signature(par(S1,S2)::state,[S1::state,S2::state]).
 '/bootstrap':projection(par(S1,S2)::state,'/bootstrap':horiz(['/bootstrap':vis(S1::state),'/bootstrap':symbol(8741),'/bootstrap':vis(S2::state)])).
 '/bootstrap':alias(par(S1,S2)::state,!'||').
-'/util':behavior(par(S1,S2)::state,!'responds to events by applying them separately on S1 and S2', (trans(par(bar,baz),foo,Target),'/util':assertEqual(Target,par(baz,'bar2'),state))).
+'/util':behavior(par(S1,S2)::state,!'responds to events by applying them separately on S1 and S2', (trans(par(bar,bar),foo,Target),'/util':assertEqual(Target,par(baz,baz),state))).
 annotation:shrink((transDefined(par(S1,S2),Ev,par(S1Prime,S2Prime)):-trans(S1,Ev,S1Prime),trans(S2,Ev,S2Prime))).
+annotation:shrink((entryEvents(par(S1,S2),Events,par(S1Prime,S2Prime)):-builtin:if(entryEvents(S1,Ev1,S1Prime),builtin:true,Ev1::'/bootstrap':list(event)=[]::'/bootstrap':list(event)),builtin:if(entryEvents(S2,Ev2,S2Prime),builtin:true,Ev2::'/bootstrap':list(event)=[]::'/bootstrap':list(event)),'/bootstrap':append(Ev1,Ev2,Events,event))).

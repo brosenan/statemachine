@@ -6,6 +6,9 @@
 '/bootstrap':signature(on(State1,Event,State2)::'/bootstrap':statement,[State1::state,Event::event,State2::state]).
 '/bootstrap':projection(on(State1,Event,State2)::'/bootstrap':statement,'/bootstrap':horiz(['/bootstrap':label(!on),'/bootstrap':vis(State1::state),'/bootstrap':label(!.),'/bootstrap':vis(Event::event),'/bootstrap':symbol(8658),'/bootstrap':vis(State2::state)])).
 on(bar,foo,baz).
+'/bootstrap':signature(onEntry(State,Events)::'/bootstrap':statement,[State::state,Events::'/bootstrap':list(event)]).
+'/bootstrap':projection(onEntry(State,Events)::'/bootstrap':statement,'/bootstrap':horiz(['/bootstrap':label(!'on entry'),'/bootstrap':vis(State::state),'/bootstrap':label(!emit),cpi:vis(Events::'/bootstrap':list(event),'/bootstrap':vert)])).
+'/bootstrap':disabled(onEntry(baz,['foo2'])).
 '/bootstrap':signature(transDefined(Source,Event,Dest)::'/bootstrap':pred,[Source::state,Event::event,Dest::state]).
 on(Source,Event,Dest)~>transDefined(Source,Event,Dest):-builtin:true.
 '/bootstrap':signature(trans(Source,Event,Dest)::'/bootstrap':pred,[Source::state,Event::event,Dest::state]).
